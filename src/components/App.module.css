@@ -1,0 +1,30 @@
+.app {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 16px;
+  padding-bottom: 24px;
+}
+.title {
+  padding-top: 20%;
+  text-align: center;
+  color: #3f51b5;
+}
+.loaderContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7); /* Добавим полупрозрачный фон */
+  z-index: 999; /* Поднимем контейнер над остальными элементами */
+}
+/* App.module.css */
+.custom-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Добавьте любые другие стили, которые вам необходимы */
+}
