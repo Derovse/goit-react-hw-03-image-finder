@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-
 import SearchBar from './Searchbar/Searchbar';
 import Button from '../components/Button/Button';
-import Api from './Api';
+import Api from '../Api';
 import Loader from 'components/Loader/Loader';
-import Modal from './Modal/Modal';
 import ImageGallery from './ImageGallery/ImageGallery';
-
+import Modal from './Modal/Modal';
 import css from './App.module.css';
 
 export class App extends Component {
@@ -17,7 +15,8 @@ export class App extends Component {
     tags: '',
     totalPages: 0,
     isLoading: false,
-    modal: { isOpen: false, imgModal: null, tags: '' },
+    modalImg: null,
+    modalTags: '',
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -50,18 +49,23 @@ export class App extends Component {
   };
 
   scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    const scrollStep = -window.scrollY / 50;
+
+    const scrollInterval = setInterval(() => {
+      if (window.scrollY !== 0) {
+        window.scrollBy(0, scrollStep);
+      } else {
+        clearInterval(scrollInterval);
+      }
+    }, 15);
   };
 
-  onClickModalOpen = (img, tags) => {
-    this.setState({ modal: { isOpen: true, imgModal: img, tags } });
+  onClickModalOpen = (imgModal, tags) => {
+    this.setState({ modalImg: imgModal, modalTags: tags });
   };
 
-  onClickModalCloys = () => {
-    this.setState({ modal: { isOpen: false, imgModal: null, tags: '' } });
+  onClickModalClose = () => {
+    this.setState({ modalImg: null, modalTags: '' });
   };
 
   clickBtn = () => {
@@ -69,25 +73,26 @@ export class App extends Component {
   };
 
   render() {
-    const { img, page, modal, isLoading, totalPages } = this.state;
+    const { img, page, isLoading, totalPages, modalImg, modalTags } =
+      this.state;
     return (
       <div className={css.app}>
         <SearchBar onSubmit={this.onSubmit} />
-        {modal.isOpen && (
+        {modalImg && (
           <Modal
-            onCloys={this.onClickModalCloys}
-            imgModal={modal.imgModal}
-            modalTags={modal.tags}
+            onClose={this.onClickModalClose}
+            imgModal={modalImg}
+            modalTags={modalTags}
           />
         )}
-        <ImageGallery openModal={this.onClickModalOpen} items={img} />
+        <ImageGallery items={img} openModal={this.onClickModalOpen} />
         <Button
           onClick={this.clickBtn}
           img={img}
           totalPages={totalPages}
           page={page}
         />
-        {isLoading && <Loader isLoading={isLoading} />} {}
+        {isLoading && <Loader isLoading={isLoading} />}
       </div>
     );
   }
