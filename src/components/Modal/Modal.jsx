@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as basicLightbox from 'basiclightbox';
-import 'basiclightbox/dist/basicLightbox.min.css'; // Подключение стилей библиотеки
+import classnames from 'classnames';
+
+import css from './Modal.module.css';
 
 export class Modal extends Component {
   componentDidMount() {
@@ -24,24 +25,12 @@ export class Modal extends Component {
     }
   };
 
-  showBasicLightbox = e => {
-    e.stopPropagation();
-    const { imgModal, modalTags } = this.props;
-    const instance = basicLightbox.create(`
-      <div class="custom-overlay">
-        <div class="custom-modal">
-          <img src="${imgModal}" alt="${modalTags}" loading="lazy" />
-        </div>
-      </div>
-    `);
-    instance.show();
-  };
-
   render() {
+    const modalClasses = classnames(css.modal, 'modal');
     return (
-      <div className="modal">
-        <div className="custom-overlay" onClick={this.handleBackdropClick}>
-          <div className="custom-modal">
+      <div className={modalClasses}>
+        <div className={css.overlay} onClick={this.handleBackdropClick}>
+          <div className={css.customModal}>
             <img
               src={this.props.imgModal}
               alt={this.props.modalTags}
