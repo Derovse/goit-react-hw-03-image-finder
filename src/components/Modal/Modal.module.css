@@ -6,24 +6,24 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Затемненный фон */
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 999;
 }
 
 .customModal {
-  max-width: 90%; /* Максимальная ширина модалки */
-  max-height: 90vh; /* Максимальная высота модалки */
-  overflow: auto; /* Добавляем прокрутку, если изображение слишком большое */
+  max-width: 90%;
+  max-height: 90vh;
+  overflow: auto;
 }
 
 .centeredImage {
   display: block;
   margin: 0 auto;
-  max-width: 100%; /* Максимальная ширина изображения */
-  max-width: 90vh; /* Максимальная ширина модалки */
+  max-width: 100%;
+  max-width: 90vh;
   max-height: 90vh;
   height: auto;
 }
