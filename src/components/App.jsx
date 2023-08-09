@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchBar from './Searchbar/Searchbar';
 import Button from '../components/Button/Button';
-import Api from '../Api';
+import Api from '../service/api';
 import Loader from 'components/Loader/Loader';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Modal from './Modal/Modal';

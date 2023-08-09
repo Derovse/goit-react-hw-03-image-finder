@@ -1,18 +1,10 @@
+// Modal.jsx
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
-
-import css from './Modal.module.css';
+import css from './Modal.module.css'; // Импортируем стили
 
 export class Modal extends Component {
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
-
   handleKeyDown = e => {
     if (e.code === 'Escape') {
       this.props.onClose();
@@ -25,19 +17,24 @@ export class Modal extends Component {
     }
   };
 
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  }
+
   render() {
-    const modalClasses = classnames(css.modal, 'modal');
     return (
-      <div className={modalClasses}>
-        <div className={css.overlay} onClick={this.handleBackdropClick}>
-          <div className={css.customModal}>
-            <img
-              src={this.props.imgModal}
-              alt={this.props.modalTags}
-              loading="lazy"
-              onClick={this.showBasicLightbox}
-            />
-          </div>
+      <div className={css.overlay} onClick={this.handleBackdropClick}>
+        <div className={css.customModal}>
+          <img
+            className={css.centeredImage}
+            src={this.props.imgModal}
+            alt={this.props.modalTags}
+            loading="lazy"
+          />
         </div>
       </div>
     );
